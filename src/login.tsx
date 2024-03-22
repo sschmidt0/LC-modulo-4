@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 import styles from "./login.module.scss";
 
 export const LoginPage: React.FC = () => {
@@ -19,28 +21,26 @@ export const LoginPage: React.FC = () => {
 
   return (
     <div className={styles.container}>
+      <h2>Login</h2>
       <form onSubmit={handleNavigation} className={styles.form}>
-        <h2>Login</h2>
-
-        <div>
-          <div>
-            <label>Username: </label>
-            <input
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Password: </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-        </div>
-
-        <button type="submit">Login</button>
+        <TextField
+          id="outlined-basic"
+          label="Username"
+          variant="outlined"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <TextField
+          id="outlined-basic"
+          label="Password"
+          variant="outlined"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+        />
+        <Button variant="contained" type="submit">
+          Login
+        </Button>
       </form>
     </div>
   );
