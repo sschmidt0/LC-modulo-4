@@ -1,5 +1,10 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
 import styles from "./detail.module.scss";
 
 interface MemberDetailEntity {
@@ -32,15 +37,19 @@ export const DetailPage: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <h2>Hello from Detail page</h2>
-      <div className={styles.container__inner}>
-        <h3>User Id: {id}</h3>
-        <p> id: {member.id}</p>
-        <p> login: {member.login}</p>
-        <p> name: {member.name}</p>
-        <p> company: {member.company}</p>
-        <p> bio: {member.bio}</p>
-      </div>
+      <Typography variant="h2">Detail page</Typography>
+      <Card className={styles.container__inner}>
+        <CardContent>
+          <Typography variant="h6">User Id: {id}</Typography>
+          <List className={styles.list}>
+            <ListItem>id: {member.id}</ListItem>
+            <ListItem> login: {member.login}</ListItem>
+            <ListItem> name: {member.name}</ListItem>
+            <ListItem> company: {member.company}</ListItem>
+            <ListItem> bio: {member.bio}</ListItem>
+          </List>
+        </CardContent>
+      </Card>
       <Link to="/list">Back to list page</Link>
     </div>
   );
