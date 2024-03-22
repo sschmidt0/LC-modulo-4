@@ -1,5 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Table from "@mui/material/Table";
+import TableCell from "@mui/material/TableCell";
+import TableHead from "@mui/material/TableHead";
+import TableBody from "@mui/material/TableBody";
+import TableRow from "@mui/material/TableRow";
+import Avatar from "@mui/material/Avatar";
 import styles from "./list.module.scss";
 
 interface MemberEntity {
@@ -36,27 +45,47 @@ export const ListPage: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <h2>Member list</h2>
+      <Typography variant="h1">Member list</Typography>
       <form className={styles["search-form"]}>
-        <input
-          name="search organization"
+        <TextField
+          id="search-organization"
+          variant="outlined"
           value={organization}
           onChange={handleChangeOrganization}
         />
-        <button onClick={handleClick}>Search for organization's members</button>
+        <Button variant="contained" onClick={handleClick}>
+          LogSearch for organization's membersin
+        </Button>
       </form>
-      <div className={styles["list-user-list-container"]}>
-        <span className={styles["list-header"]}>Avatar</span>
-        <span className={styles["list-header"]}>Id</span>
-        <span className={styles["list-header"]}>Name</span>
-        {members.map((member) => (
-          <React.Fragment key={member.id}>
-            <img src={member.avatar_url} />
-            <span>{member.id}</span>
-            <Link to={`/detail/${member.login}`}>{member.login}</Link>
-          </React.Fragment>
-        ))}
-      </div>
+      <Table className={styles.table} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell className={styles["table__header-cell"]}>
+              Avatar
+            </TableCell>
+            <TableCell className={styles["table__header-cell"]}>Id</TableCell>
+            <TableCell className={styles["table__header-cell"]}>Name</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {members.map((member) => (
+            <TableRow key={member.id}>
+              <TableCell>
+                <Avatar
+                  src={member.avatar_url}
+                  className={styles.image}
+                  alt={member.id}
+                />
+              </TableCell>
+              <TableCell>{member.id}</TableCell>
+              <TableCell>
+                <Link to={`/detail/${member.login}`}>{member.login}</Link>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+
       <Link to="/detail">Navigate to detail page</Link>
     </div>
   );
